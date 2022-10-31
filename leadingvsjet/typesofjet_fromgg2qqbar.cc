@@ -138,20 +138,8 @@ TFile *f = new TFile(inputpath, "read");
         <<"gluon quark tagged: "<<ngtaggedijet<<endl
         <<"else: "<<netaggedijet<<endl;
 
-    return;
-/*
-	TString outpath="./jetparticle";
-    if(inputpath.Contains("MPI")) outpath="./MPI/jetparticle";
-    else if(inputpath.Contains("ISR")) outpath="./ISR/jetparticle";
-    else if(inputpath.Contains("FSR")) outpath="./FSR/jetparticle";
+	TString outpath="./typesofjet_fromgg2qqbar";
 
-    if(mode==1) outpath.Append("gg2qqbar");
-    else outpath.Append("gg2gg");
-
-    if(inputpath.Contains("MIF")) outpath.Append("MIF");
-    else if(inputpath.Contains("MPI")) outpath.Append("MPI");
-    else if(inputpath.Contains("ISR")) outpath.Append("ISR");
-    else if(inputpath.Contains("FSR")) outpath.Append("FSR");
 
     TString Rsize;
 	Rsize.Form("R%02d",Rindex+2);
@@ -159,13 +147,11 @@ TFile *f = new TFile(inputpath, "read");
     outpath.Append(".root");
     TFile *outfile = new TFile(outpath, "RECREATE");
     
-    pt->Write();
-    eta->Write();
-    phi->Write();
-    dr1D->Write();
+    qpt->Write(); qeta->Write(); qphi->Write(); qdr->Write();
+    gpt->Write(); geta->Write(); gphi->Write(); gdr->Write();
+    ept->Write(); eeta->Write(); ephi->Write(); edr->Write();
 
     outfile->Write();
     outfile->Close();
 return;
-*/
 }
