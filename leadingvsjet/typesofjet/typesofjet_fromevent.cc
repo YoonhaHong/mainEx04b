@@ -23,16 +23,18 @@ float getr(float eta1, float eta2, float phi1, float phi2){
 	else if(dphi>pi) dphi-=2*pi;
 	return sqrt(deta*deta+dphi*dphi);
 }
-void typesofjet_fromgg2qqbar(int Rindex=5, TString inputpath="../gg2qqbarfull_MIF.root") //5 -> R=0.7
+void typesofjet_fromevent(int Rindex=5, TString inputpath="../HardQCD:all/allfull_MIF.root") 
+//5 -> R=0.7 "../gg2qqbarfull_MIF.root"
 {
     //int mode=inputpath.Contains("qq"); //if quark jet mode =1 
+    int eventmode = inputpath.Contains("gg2qqbar");
 
-    float *p_pt=new float[2000];
-	float *p_eta=new float[2000];
-	float *p_phi=new float[2000];
-	bool *p_chg=new bool[2000];
-	int *p_id=new int[2000];
-    int *p_status=new int[2000];
+    float *p_pt=new float[5000];
+	float *p_eta=new float[5000];
+	float *p_phi=new float[5000];
+	bool *p_chg=new bool[5000];
+	int *p_id=new int[5000];
+    int *p_status=new int[5000];
 
 	float *ijet_pt=new float[20];
 	float *ijet_eta=new float[20];
@@ -137,9 +139,10 @@ TFile *f = new TFile(inputpath, "read");
         <<"light quark tagged: "<<nqtaggedijet<<endl
         <<"gluon quark tagged: "<<ngtaggedijet<<endl
         <<"else: "<<netaggedijet<<endl;
-
-	TString outpath="./typesofjet_fromgg2qqbar";
-
+    
+    TString outpath;
+    if(eventmode == 1) outpath="./typesofjet_fromgg2qqbar";
+    else outpath="./typesofjet_fromall";
 
     TString Rsize;
 	Rsize.Form("R%02d",Rindex+2);
